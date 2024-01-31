@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
-import { getDatabase, ref, push, remove, update, onValue } from 'firebase/database';
+import { getDatabase, ref, push, remove, update, onValue, set } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -10,10 +10,13 @@ const firebaseConfig = {
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+  databaseURL: 'https://todo-1bc8e-default-rtdb.europe-west1.firebasedatabase.app',
+
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getDatabase(app);
+const todoRef = ref(db, 'Todos');
 
-export { auth, db, ref, push, remove, update, onValue, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut };
+export { auth, db, todoRef, ref, push, remove, update, onValue, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, set };
